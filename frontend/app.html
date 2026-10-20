@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>ScholarSwarm · Dashboard</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;600&family=Newsreader:ital,wght@0,500;0,600;1,500&family=Nunito+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/styles.css">
+</head><body>
+<div class="topbar">Official gov &amp; university sources only · drafts only, never submitted</div>
+<div class="shell">
+  <aside class="side">
+    <a href="index.html" class="brand"><div class="logo"><svg class="icon icon-lg" viewBox="0 0 24 24"><path d="m12 3-1.9 5.8a2 2 0 0 1-1.3 1.3L3 12l5.8 1.9a2 2 0 0 1 1.3 1.3L12 21l1.9-5.8a2 2 0 0 1 1.3-1.3L21 12l-5.8-1.9a2 2 0 0 1-1.3-1.3Z"/></svg></div><div>ScholarSwarm<small>AUTONOMOUS SWARM CORE</small></div></a>
+    <div class="pill green" id="agentPill"><span class="dot"></span> 6 agents ready</div>
+    <div style="height:10px"></div>
+    <a class="nav-i" data-v="overview" href="#overview"><svg class="icon" viewBox="0 0 24 24"><rect width="7" height="7" x="3" y="3" rx="1"/><rect width="7" height="7" x="14" y="3" rx="1"/><rect width="7" height="7" x="14" y="14" rx="1"/><rect width="7" height="7" x="3" y="14" rx="1"/></svg> Overview</a>
+    <a class="nav-i" data-v="profile" href="#profile"><svg class="icon" viewBox="0 0 24 24"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg> Profile Setup</a>
+    <a class="nav-i" data-v="swarm" href="#swarm"><svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><circle cx="19" cy="5" r="2"/><circle cx="5" cy="5" r="2"/><circle cx="5" cy="19" r="2"/><circle cx="19" cy="19" r="2"/><path d="M10.5 10.5 6.5 6.5m7 4 4-4m-4 7 4 4m-7-4-4 4"/></svg> Live Swarm</a>
+    <a class="nav-i" data-v="matches" href="#matches"><svg class="icon" viewBox="0 0 24 24"><path d="m9 12 2 2 4-4"/><circle cx="12" cy="12" r="10"/></svg> Matches</a>
+    <a class="nav-i" data-v="draft" href="#draft"><svg class="icon" viewBox="0 0 24 24"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/><line x1="16" y1="13" x2="8" y2="13"/><line x1="16" y1="17" x2="8" y2="17"/></svg> Application Draft</a>
+    <a class="nav-i" data-v="sources" href="#sources"><svg class="icon" viewBox="0 0 24 24"><ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/><path d="M3 12c0 1.66 4 3 9 3s9-1.34 9-3"/></svg> Sources</a>
+    <div class="user"><div class="avatar" id="uAv">S</div><div><b id="uName">Student</b><div class="muted" style="font-size:11px" id="uSub">Active profile</div></div></div>
+  </aside>
+
+
+  <main class="main"><div id="view"></div></main>
+</div>
+<script src="js/config.js"></script>
+<script src="js/api.js"></script>
+<script src="js/views.js"></script>
+<script src="js/app.js"></script>
+</body></html>
