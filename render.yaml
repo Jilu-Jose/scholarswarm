@@ -1,0 +1,26 @@
+services:
+  - type: web
+    name: scholarswarm-backend
+    runtime: python
+    region: oregon
+    plan: free
+    rootDir: backend
+    buildCommand: pip install -r requirements.txt
+    startCommand: uvicorn app.main:app --host 0.0.0.0 --port $PORT
+    envVars:
+      - key: PYTHON_VERSION
+        value: 3.11.8
+      - key: LLM_API_KEY
+        sync: false
+      - key: LLM_BASE_URL
+        value: https://api.groq.com/openai/v1
+      - key: LLM_MODEL
+        value: openai/gpt-oss-120b
+      - key: LIVE_FETCH
+        value: "1"
+      - key: LIVE_DISCOVERY
+        value: "1"
+      - key: MAX_CONCURRENCY
+        value: "5"
+      - key: FETCH_TIMEOUT
+        value: "12"

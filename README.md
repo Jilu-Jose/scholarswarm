@@ -325,6 +325,83 @@ ScholarSwarm is architected with complete resilience:
 
 ---
 
+## Production Deployment Guide
+
+You can easily deploy ScholarSwarm with a decoupled architecture:
+- **Backend (FastAPI + Swarm Engine)** on **[Render](https://render.com)** (Free Web Service)
+- **Frontend (Vanilla HTML/CSS/JS)** on **[Vercel](https://vercel.com)** (Free Static Hosting)
+
+```
+┌────────────────────────────────┐         REST / SSE Stream          ┌────────────────────────────────┐
+│      Vercel (Frontend)         │ ─────────────────────────────────> │       Render (Backend)         │
+│  https://scholarswarm.vercel.app│ <───────────────────────────────── │ https://backend.onrender.com   │
+└────────────────────────────────┘         Direct CORS Requests       └────────────────────────────────┘
+```
+
+### Step 1: Deploy Backend to Render
+
+1. Push your repository to **GitHub**.
+2. Sign in to **[Render](https://dashboard.render.com/)**.
+3. Click **New +** > **Web Service** (or use **Blueprint** with the included `render.yaml`).
+4. Connect your GitHub repository.
+5. Configure the service settings:
+   - **Name**: `scholarswarm-backend`
+   - **Root Directory**: `backend`
+   - **Runtime**: `Python 3`
+   - **Build Command**: `pip install -r requirements.txt`
+   - **Start Command**: `uvicorn app.main:app --host 0.0.0.0 --port $PORT`
+   - **Instance Type**: `Free`
+6. Under **Environment Variables**, add:
+   - `PYTHON_VERSION`: `3.11.8`
+   - `LLM_API_KEY`: *(Your Groq API key, e.g. `gsk_...`)*
+   - `LLM_MODEL`: `openai/gpt-oss-120b`
+   - `LLM_BASE_URL`: `https://api.groq.com/openai/v1`
+   - `LIVE_FETCH`: `1`
+   - `LIVE_DISCOVERY`: `1`
+   - `TAVILY_API_KEY`: *(Optional)*
+   - `GITHUB_TOKEN`: *(Optional)*
+7. Click **Create Web Service**. Once deployed, copy your Render URL:
+   `https://scholarswarm-backend.onrender.com`
+8. Verify it by visiting `https://scholarswarm-backend.onrender.com/api/health` in your browser.
+
+> [!NOTE]
+> Render free instances spin down after 15 minutes of inactivity. When waking from sleep, the first request may take ~45 seconds.
+
+---
+
+### Step 2: Configure Frontend API Endpoint
+
+In `frontend/js/config.js`, update `window.API_BASE` with your live Render backend URL:
+
+```javascript
+window.API_BASE = "https://scholarswarm-backend.onrender.com";
+```
+
+*(You can also override this anytime in browser DevTools via `localStorage.setItem("ss_api_base", "https://your-backend.onrender.com")` without redeploying).*
+
+Commit and push this change to your repository:
+```bash
+git add frontend/js/config.js
+git commit -m "Configure live Render backend URL"
+git push
+```
+
+---
+
+### Step 3: Deploy Frontend to Vercel
+
+1. Sign in to **[Vercel](https://vercel.com)**.
+2. Click **Add New...** > **Project** and import your GitHub repository.
+3. Configure project settings:
+   - **Framework Preset**: `Other`
+   - **Root Directory**: `./` *(The root `vercel.json` automatically directs Vercel to the `frontend/` directory)*
+   - **Build Command**: *(Leave empty — zero build step required)*
+   - **Output Directory**: `frontend` *(Configured in `vercel.json`)*
+4. Click **Deploy**.
+5. Your ScholarSwarm UI will be live with full real-time agent streaming at `https://your-project.vercel.app`!
+
+---
+
 ## License
 
 This project is licensed under the MIT License — see the [LICENSE](LICENSE) file for details.
