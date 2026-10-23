@@ -12,4 +12,3 @@ The curated registry carries only indicative criteria; deadlines are shown only 
 **Known limits (please read).** Registry criteria such as minimum CGPA are indicative, not official. Deadlines are extracted from page text
 and should be confirmed on the linked page. Live verification needs outbound internet access from wherever the backend runs.
 
-*(Replace this note with your own words and numbers after you run it.)*
